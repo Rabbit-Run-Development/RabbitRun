@@ -1,0 +1,13 @@
+#Rabbit{
+    background-color: pink;
+     width: 50px;
+     height: 50px;
+     position: absolute;
+ }
+
+#Fox{
+    background-color: orange;
+    width:70px;
+    height: 60px;
+    position: absolute;
+    }
