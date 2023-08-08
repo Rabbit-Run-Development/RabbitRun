@@ -1,13 +1,22 @@
-let fox = document.getElementById('fox');
-let rect = fox.getBoundingClientRect();
+// import kaboom from "kaboom";
 
-console.log(rect.top,rect.left)
+// Initialize kaboom
+kaboom({
+    
+});
 
-let marginLeftSquare = 0
-let marginLeftCircle = 0
+// Create a box and make it move
+const box = add([
+    rect(80, 80),
+    pos(0, 500),
+    color(139, 0, 0),
+    move(RIGHT, 140), // Note the change here
+]);
 
-setInterval(() => {
-    marginLeftSquare += 2;
-    fox.style.marginLeft = `${marginLeftSquare}px`
 
-},50);
+
+// setInterval(() => {
+//     marginLeftSquare += 2;
+//     fox.style.marginLeft = `${marginLeftSquare}px`
+
+// },50);
