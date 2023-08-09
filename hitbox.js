@@ -1,14 +1,14 @@
-const FLOOR_HEIGHT = 48;
+const FLOOR_HEIGHT = 132.5;
 const JUMP_FORCE = 800;
-const SPEED = 480;
+const SPEED = 300;
 
 kaboom({
-    
+
 });
 
 scene("game", () => {
-    
-    setGravity(3000)
+
+    setGravity(2700)
 
     const player = add([
         rect(80, 80),
@@ -16,18 +16,17 @@ scene("game", () => {
         area(),
         body(),
         color(255, 182, 193),
-        move(RIGHT, 150),
+        move(RIGHT, 60),
     ]);
-    
+
     const enemy = add([
         rect(100, 80),
         pos(-170, 500),
-        area(),
-        body(),
         color(255, 109, 10),
-        move(RIGHT, 107)])
-        
-         add([
+        move(RIGHT, 42)
+    ])
+
+    add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
         pos(0, height()),
@@ -36,19 +35,19 @@ scene("game", () => {
         body({ isStatic: true }),
         color(127, 200, 255),
     ]);
-         
-         function jump() {
+
+    function jump() {
         if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
     }
-        
-        onKeyPress("space", jump);
-        onClick(jump);
-        
-        function spawnRock() {
-             add([
-            rect(40, rand(32, 50)),
+
+    onKeyPress("space", jump);
+    onClick(jump);
+
+    function spawnRock() {
+        add([
+            rect(37, rand(32, 50)),
             area(),
             outline(4),
             pos(width(), height() - FLOOR_HEIGHT),
@@ -57,12 +56,41 @@ scene("game", () => {
             move(LEFT, SPEED),
             "rock",
         ]);
+
+        wait(rand(1, 2), spawnRock);
+
+    }
+
+    spawnRock()
+
+    slowRabbit = () => {
+        setTimeout(
+            player.move(-SPEED + 137, 0)
+       )
+    }
+
+    player.onCollideUpdate("rock", () => {
+        slowRabbit();
+        shake();
+
+    })
+    
+    player.onCollide(enemy, () => {
         
-        wait(rand(0.5, 1.5), spawnRock);
-        
-        }
-        
-        spawnRock()
+    })
+
+    let score = 0
+
+    const scoreLabel = add([
+        text(score),
+        pos(24, 24)
+    ]);
+
+    onUpdate(() => {
+        score++;
+        scoreLabel.text = score;
+    });
+
 });
 
 go("game")
