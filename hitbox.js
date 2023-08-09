@@ -22,6 +22,8 @@ scene("game", () => {
     const enemy = add([
         rect(100, 80),
         pos(-170, 500),
+        area(),
+        body(),
         color(255, 109, 10),
         move(RIGHT, 107)])
         
@@ -43,6 +45,24 @@ scene("game", () => {
         
         onKeyPress("space", jump);
         onClick(jump);
+        
+        function spawnRock() {
+             add([
+            rect(40, rand(32, 50)),
+            area(),
+            outline(4),
+            pos(width(), height() - FLOOR_HEIGHT),
+            anchor("botleft"),
+            color(255, 180, 255),
+            move(LEFT, SPEED),
+            "rock",
+        ]);
+        
+        wait(rand(0.5, 1.5), spawnRock);
+        
+        }
+        
+        spawnRock()
 });
 
 go("game")
