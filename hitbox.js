@@ -13,6 +13,8 @@ scene("game", () => {
     const player = add([
         rect(80, 80),
         pos(75, 500),
+        area(),
+        body(),
         color(255, 182, 193),
         move(RIGHT, 150),
     ]);
