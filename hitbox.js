@@ -5,7 +5,9 @@ const SPEED = 300;
 kaboom({
 
 });
-
+loadSprite("rabbit2", "sprites/rabbit2.png")
+loadSprite("rock", "sprites/rock.png")
+loadSprite("fox", "sprites/fox.png")
 scene("game", () => {
 
     setGravity(2700)
@@ -19,16 +21,17 @@ scene("game", () => {
         ])
 
     const player = add([
-        rect(65, 65),
+        sprite("rabbit2"),
         pos(75, 500),
         area(),
         body(),
         color(255, 182, 193),
         move(RIGHT, 60),
+        scale(.17)
     ]);
 
     const enemy = add([
-        rect(130, 60),
+        sprite("fox"),
         area(),
         body(),
         pos(-114, 500),
@@ -57,7 +60,7 @@ scene("game", () => {
 
     function spawnRock() {
         add([
-            rect(37, rand(35, 35)),
+            sprite("rock"),
             area(),
             outline(4),
             pos(width(), height() - FLOOR_HEIGHT),
@@ -65,9 +68,10 @@ scene("game", () => {
             color(255, 180, 255),
             move(LEFT, SPEED),
             "rock",
+            scale(0.04)
         ]);
 
-        wait(rand(1, 1.5), spawnRock);
+        wait(rand(.5, 1.5), spawnRock);
 
     }
 
