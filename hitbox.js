@@ -3,12 +3,85 @@ const JUMP_FORCE = 800;
 const SPEED = 300;
 
 kaboom({
-
+   // background-color([0,0,0]),
 });
 
-scene("game", () => {
 
+
+loadSprite("background", "./garden2.jpg")
+loadSprite("user", "./rabbitrun.png")
+loadSprite("player", "./foxrun.png")
+loadSprite("fox","./purplesky.jpg")
+loadSprite("bunny","./bunnygame.png")
+loadSprite("bunny","./enemy.png")
+
+//scene("Rabbit intro",() => {
+   // constbackgroundImage = add([
+     //   sprite("background"),
+        // width(100%)
+       // ])
+//});
+// go("Rabbit intro")
+scene("start", () => {
+  const backgroundImage = add([
+    sprite("background"),
+    ]);
+    // const waterBalloon = add([
+    // sprite("water"), // sprite() component makes it render as a sprite
+    // pos(width()/2, height() / 2),
+    // anchor("center"),
+    // scale(1.5),
+    // ]);
+//   loadFont("speed", "./fonts/SpeedRush-JRKVB.ttf")
+  const titleText = add([
+    text("Rabbit   Run!!!", {
+        // font: "speed", // Replace with the actual font you loaded
+        size: 68, // Adjust the size as needed
+        color: rgb(0, 1, 0.6), // Text color (white in this case)
+    }),
+    pos(width() / 2, height() / 3), // Adjust the position as needed
+    anchor("center"),
+    scale(1),
+]);
+  const enter = add([
+    text("press enter to Play", {
+        // font: "speed",
+        size: 68,
+        color: rgb(0, 1, 0.6),
+    }),
+    pos(width() / 2, height() / 2),
+    anchor("center"),
+    scale(0.8),
+    ]);
+   onKeyPress("enter", () => {
+     go("game");
+   });
+const user = add([
+    sprite("user"),
+    scale(0.5),
+    pos(900,450)
+    ]);
+    
+    const player = add([
+        sprite("player"),
+        scale(0.8),
+        pos(300,300),
+        ]);
+});
+go("start")
+
+scene("game", () => {
+     // constbackgroundImage = add([
+        //sprite("backgroun"),
+        // width(100%)
+        // ])
     setGravity(2700)
+    
+    scene2  = add([
+        sprite("fox"),
+        scale(1.8),
+        pos(0,-1090),
+        ]);
     
     const goal = add([
         rect(60, 60),
@@ -19,7 +92,8 @@ scene("game", () => {
         ])
 
     const player = add([
-        rect(65, 65),
+       
+       rect(65, 65),
         pos(75, 500),
         area(),
         body(),
@@ -28,8 +102,9 @@ scene("game", () => {
     ]);
 
     const enemy = add([
-        rect(130, 60),
-        area(),
+  
+         rect(130, 60),
+         area(),
         body(),
         pos(-114, 500),
         color(255, 109, 10),
@@ -43,7 +118,7 @@ scene("game", () => {
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
-        color(127, 200, 255),
+        color(0,0,0),
     ]);
 
     function jump() {
@@ -103,4 +178,4 @@ scene("game", () => {
 
 });
 
-go("game")
+//go("game")
